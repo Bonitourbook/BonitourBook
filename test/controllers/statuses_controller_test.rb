@@ -11,16 +11,29 @@ class StatusesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:statuses)
   end
 
-  test "should get new" do
+  test "deber ser redirigido cuando no ha iniciado sesion" do
     get :new
     assert_response :redirect
     assert_redirected_to new_user_session_path
   end
 
+  test "deberia mostrar la nueva pagina cuando inicio sesion" do
+    sign_in users (:juanso)
+    get :new
+    assert_response :success
+  end
+
+  test "debe iniciar sesion para hacer un post" do
+    post :create, status: { contenido: "Hola mundo" }
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
+  end
+
   test "should create status" do
+    sign_in users (:juanso)
     assert_difference('Status.count') do
-      post :create, status: { contenido: @status.contenido }
-    end
+    post :create, status: { contenido: @status.contenido }
+  end
 
     assert_redirected_to status_path(assigns(:status))
   end
