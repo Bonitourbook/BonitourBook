@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :statuses
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  
+  devise_scope :user do
+    get 'registrarse', to: 'devise/registrations#new', as: :registrar
+    get 'comenzar', to: 'devise/sessions#new', as: :comenzar
+    get 'destruir', to: 'devise/sessions#destroy', as: :destruir
+  end
 
-  # You can have the root of your site routed with "root"
+  resources :statuses
+  get 'timeline', to: 'statuses#index', as: :timeline
   root to: 'statuses#index'
+
+  get '/:id', to: 'perfil#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

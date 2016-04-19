@@ -12,15 +12,15 @@
 		<div class="container">
 			<a href="#" class="navbar-brand">BonitourBook</a>
 			<ul class="nav navbar-nav">
-        		<li class="active"><%= link_to "Status", statuses_path %></a></li>
+        		<li class="active"><%= link_to "Status", timeline_path %></li>
         	</ul>
         	<ul class="nav navbar-nav pull-right">
         		<% if user_signed_in? %>
         			<li><%= link_to current_user.nombre_completo, edit_user_registration_path %></li>
-        			<li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
+        			<li><%= link_to "Cerrar sesión", destruir_path %></li>
         		<% else  %>
-        			<li><%= link_to "Registrarse", new_user_registration_path %></li>
-        			<li><%= link_to "Iniciar sesión", new_user_session_path %></li>
+        			<li><%= link_to "Registrarse", registrar_path %></li>
+        			<li><%= link_to "Iniciar sesión", comenzar_path %></li>
         		<% end %>
 
         	</ul>
@@ -28,8 +28,14 @@
 	</div>
 
 	<div class="container">
-		<p class="notice"><%= notice %></p>
-       	<p class="alert"><%= alert %></p>
+
+		<% flash.each do | type, message | %>
+			<div class="alert <%= flash_class type %> alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button> 
+				<%= message %>
+			</div>
+		<%end %>
+
 		<%= yield %>
 	</div>
 
