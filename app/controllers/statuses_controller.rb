@@ -33,7 +33,7 @@ class StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_to @status, notice: 'Status was successfully created.' }
+        format.html { redirect_to @status, notice: 'Post creado correctamente.' }
         format.json { render :show, status: :created, location: @status }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class StatusesController < ApplicationController
   def update
     respond_to do |format|
       if @status.update(status_params)
-        format.html { redirect_to @status, notice: 'Status was successfully updated.' }
+        format.html { redirect_to @status, notice: 'Post actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @status }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class StatusesController < ApplicationController
   def destroy
     @status.destroy
     respond_to do |format|
-      format.html { redirect_to statuses_url, notice: 'Status was successfully destroyed.' }
+      format.html { redirect_to statuses_url, notice: 'Post eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -74,6 +74,6 @@ class StatusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
-      params.require(:status).permit(:nombre, :contenido)
+      params.require(:status).permit(:user_id, :contenido)
     end
 end

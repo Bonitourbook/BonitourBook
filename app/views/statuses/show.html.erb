@@ -2,7 +2,7 @@
 
 <p>
   <strong>Nombre:</strong>
-  <%= @status.nombre %>
+  <%= @status.user.nombre_completo %>
 </p>
 
 <p>
@@ -10,5 +10,5 @@
   <%= @status.contenido %>
 </p>
 
-<%= link_to 'Edit', edit_status_path(@status) %> |
-<%= link_to 'Back', statuses_path %>
+<%= link_to 'Editar', edit_status_path(@status) %> |
+<%= link_to 'Regresar', statuses_path %>
